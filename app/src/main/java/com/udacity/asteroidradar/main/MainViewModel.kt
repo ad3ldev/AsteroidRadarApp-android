@@ -1,5 +1,6 @@
 package com.udacity.asteroidradar.main
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.asteroidradar.Asteroid
 
@@ -18,4 +19,19 @@ class MainViewModel : ViewModel() {
         Asteroid(13,"Asteroid11", "20-02-2022", 20.0, 20.0, 20.0, 20.0, false),
         Asteroid(14, "Asteroid12", "20-02-2022", 30.0, 30.0, 30.0, 30.0, true)
     ) as MutableList<Asteroid>
+
+
+    private val _navigateToAsteroidDetails = MutableLiveData<Asteroid>()
+    val navigateToAsteroidDetails
+        get() = _navigateToAsteroidDetails
+    fun onAsteroidClicked(asteroid: Asteroid) {
+        _navigateToAsteroidDetails.value = asteroid
+    }
+    fun onAsteroidNavigated() {
+        _navigateToAsteroidDetails.value = null
+    }
+
+
+
+
 }
