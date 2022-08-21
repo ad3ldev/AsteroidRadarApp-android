@@ -7,18 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.databinding.AsteroidItemBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainAdapter() : ListAdapter<Asteroid, RecyclerView.ViewHolder>(AsteroidDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder.from(parent)
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
-            is ViewHolder->{
+        when (holder) {
+            is ViewHolder -> {
                 val asteroidItem = getItem(position) as Asteroid
                 holder.bind(asteroidItem)
             }
@@ -43,6 +39,7 @@ class ViewHolder private constructor(val binding: AsteroidItemBinding) :
         binding.asteroid = item
         binding.executePendingBindings()
     }
+
     companion object {
         fun from(parent: ViewGroup): ViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
