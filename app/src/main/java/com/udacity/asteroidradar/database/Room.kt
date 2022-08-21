@@ -3,7 +3,6 @@ package com.udacity.asteroidradar.database
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.udacity.asteroidradar.Asteroid
 
 @Dao
 interface AsteroidDao {
@@ -20,7 +19,6 @@ abstract class AsteroidsDatabase : RoomDatabase() {
 }
 
 private lateinit var INSTANCE: AsteroidsDatabase
-
 fun getDatabase(context: Context): AsteroidsDatabase {
     synchronized(AsteroidsDatabase::class.java) {
         if (!::INSTANCE.isInitialized) {

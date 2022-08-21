@@ -18,6 +18,7 @@ class AsteroidsRepository(private val database: AsteroidsDatabase) {
         Transformations.map(database.asteroidDao.getAsteroids()) {
             it.asDomainModel()
         }
+
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
             try {

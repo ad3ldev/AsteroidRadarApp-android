@@ -25,7 +25,6 @@ class MainFragment : Fragment() {
             viewModel.onAsteroidClicked(asteroid)
         })
         binding.asteroidRecycler.adapter = adapter
-//        adapter?.submitList(viewModel.asteroids)
         setHasOptionsMenu(true)
 
         viewModel.navigateToAsteroidDetails.observe(viewLifecycleOwner, Observer {
@@ -34,9 +33,6 @@ class MainFragment : Fragment() {
                 viewModel.onAsteroidNavigated()
             }
         })
-
-
-
         return binding.root
     }
 
