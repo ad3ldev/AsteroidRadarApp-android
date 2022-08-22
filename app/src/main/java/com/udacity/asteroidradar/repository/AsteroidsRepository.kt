@@ -1,6 +1,7 @@
 package com.udacity.asteroidradar.repository
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
@@ -19,23 +20,22 @@ import java.time.format.DateTimeFormatter
 
 class AsteroidsRepository(private val database: AsteroidsDatabase) {
     @RequiresApi(Build.VERSION_CODES.O)
-    private val start = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE)
+    private val now = (LocalDateTime.now()).format(DateTimeFormatter.ISO_DATE)
     @RequiresApi(Build.VERSION_CODES.O)
-    private val end = LocalDateTime.now().minusDays(7).format(DateTimeFormatter.ISO_DATE)
-
+    private val pastWeek = (LocalDateTime.now().minusDays(7)).format(DateTimeFormatter.ISO_DATE)
     val asteroids: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidDao.getAsteroids()) {
             it.asDomainModel()
         }
     @RequiresApi(Build.VERSION_CODES.O)
     val today:LiveData<List<Asteroid>> =
-        Transformations.map(database.asteroidDao.getToday(start)){
+        Transformations.map(database.asteroidDao.getToday(now)){
             it.asDomainModel()
         }
 
     @RequiresApi(Build.VERSION_CODES.O)
     val week:LiveData<List<Asteroid>> =
-        Transformations.map(database.asteroidDao.getWeek(start,end)){
+        Transformations.map(database.asteroidDao.getWeek(pastWeek,now)){
             it.asDomainModel()
         }
 
