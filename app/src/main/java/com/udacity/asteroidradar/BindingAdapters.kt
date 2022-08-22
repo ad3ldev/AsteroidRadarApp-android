@@ -1,11 +1,9 @@
 package com.udacity.asteroidradar
 
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
-import timber.log.Timber
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -50,6 +48,4 @@ fun bindImageViewToImage(imageView: ImageView, url: String?) {
         .placeholder(R.drawable.placeholder_picture_of_day)
         .error(R.drawable.placeholder_picture_of_day)
         .into(imageView)
-    Log.w("HELLO", imageView.toString())
-    Log.w("HELLO", url.toString())
 }

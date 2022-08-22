@@ -14,6 +14,7 @@ import com.udacity.asteroidradar.repository.AsteroidsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class MainViewModel(application: Application) : ViewModel() {
     private val database = getDatabase(application)
@@ -49,8 +50,8 @@ class MainViewModel(application: Application) : ViewModel() {
         withContext(Dispatchers.IO) {
             try {
                 _pictureOfDay.postValue(radar.getPictureOfTheDay())
-            } catch (err: Exception) {
-                Log.e("refreshPictureOfDay", err.message.toString())
+            } catch (e: Exception) {
+                Timber.e(e.message)
             }
         }
     }
