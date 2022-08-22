@@ -17,7 +17,7 @@ interface AsteroidService {
     fun getAsteroidsAsync(): Deferred<String>
 
     @GET("planetary/apod?api_key=${API_KEY}")
-    fun getPictureOfTheDay(): PictureOfDay
+    suspend fun getPictureOfTheDay(): PictureOfDay
 }
 
 private val moshi = Moshi.Builder()

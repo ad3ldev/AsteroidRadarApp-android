@@ -26,7 +26,6 @@ class MainFragment : Fragment() {
         })
         binding.asteroidRecycler.adapter = adapter
         setHasOptionsMenu(true)
-
         viewModel.navigateToAsteroidDetails.observe(viewLifecycleOwner, Observer {
             it?.let{
                 this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))

@@ -1,6 +1,5 @@
 package com.udacity.asteroidradar.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.udacity.asteroidradar.Asteroid
@@ -12,8 +11,10 @@ import com.udacity.asteroidradar.database.asDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import timber.log.Timber
 
 class AsteroidsRepository(private val database: AsteroidsDatabase) {
+
     val asteroids: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidDao.getAsteroids()) {
             it.asDomainModel()
@@ -26,7 +27,7 @@ class AsteroidsRepository(private val database: AsteroidsDatabase) {
                 val list = parseAsteroidsJsonResult(JSONObject(networkJson))
                 database.asteroidDao.insertAll(*list.asDatabaseModel())
             } catch (e: Exception) {
-                Log.e("Failed: Refresh AsteroidRepFile", e.message.toString())
+                Timber.e(e.message)
             }
         }
     }
