@@ -83,7 +83,7 @@ git checkout master
 Open the project in Android Studio and click the Run ‘app’ button, check that it runs correctly and you can see the app in your device or emulator.
 
 ```
-Make sure to add your API Key inside Constants.kt
+Make sure to add your API Key inside you own root gradle.properties file as "myApiNasa"
 ```
 
 ## Project Instructions
