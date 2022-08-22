@@ -4,7 +4,6 @@ gradle
 *.aar
 *.ap_
 *.aab
-gradle.properties
 
 # Files for the ART/Dalvik VM
 *.dex
@@ -87,3 +86,5 @@ lint/tmp/
 # lint/reports/
 
 .idea/*
+
+gradle.properties
