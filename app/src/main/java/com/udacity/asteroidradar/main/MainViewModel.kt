@@ -1,12 +1,12 @@
 package com.udacity.asteroidradar.main
 
 import android.app.Application
+import android.os.Build
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.annotation.RequiresApi
+import androidx.lifecycle.*
 import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.AsteroidFilters
 import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.AsteroidApi.radar
 import com.udacity.asteroidradar.database.getDatabase
@@ -26,7 +26,20 @@ class MainViewModel(application: Application) : ViewModel() {
         }
     }
 
-    val list = asteroidsRepository.asteroids
+    private val _filter = MutableLiveData(AsteroidFilters.ALL)
+
+    fun onChangeFilter(filter: AsteroidFilters) {
+        _filter.value = filter
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    val list = Transformations.switchMap(_filter) {
+        when (it!!) {
+            AsteroidFilters.TODAY -> asteroidsRepository.today
+            AsteroidFilters.WEEK -> asteroidsRepository.week
+            else -> asteroidsRepository.asteroids
+        }
+    }
 
     private val _pictureOfDay = MutableLiveData<PictureOfDay>()
     val pictureOfDay: LiveData<PictureOfDay>
